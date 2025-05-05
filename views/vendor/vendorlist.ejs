@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Premium Wedding Venues | CelebrateWise</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    :root {
+      --primary: #ff758c;
+      --primary-dark: #e91e63;
+      --secondary: #ff7eb3;
+      --dark: #2e2e2e;
+      --medium: #666;
+      --light: #f9f9f9;
+      --white: #ffffff;
+      --shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+      --transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.1);
+      --radius: 12px;
+    }
+    
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: 'Poppins', sans-serif;
+      background-color: var(--light);
+      color: var(--dark);
+      line-height: 1.6;
+    }
+    
+    .container {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+    
+    .heading {
+      text-align: center;
+      margin: 40px 0 30px;
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: var(--dark);
+      position: relative;
+    }
+    
+    .heading:after {
+      content: '';
+      position: absolute;
+      bottom: -10px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 80px;
+      height: 4px;
+      background: linear-gradient(90deg, var(--primary), var(--secondary));
+      border-radius: 2px;
+    }
+    
+    .action-bar {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 40px;
+    }
+    
+    .add-venue-btn {
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      color: white;
+      border: none;
+      padding: 12px 24px;
+      border-radius: var(--radius);
+      font-size: 1rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: var(--transition);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      box-shadow: var(--shadow);
+    }
+    
+    .add-venue-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 20px rgba(255, 117, 140, 0.3);
+    }
+    
+    .venue-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 30px;
+      padding: 0 20px 60px;
+    }
+    
+    .venue-card {
+      background-color: var(--white);
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      transition: var(--transition);
+      position: relative;
+    }
+    
+    .venue-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 16px 32px rgba(0, 0, 0, 0.12);
+    }
+    
+    .venue-img-container {
+      height: 200px;
+      overflow: hidden;
+      position: relative;
+    }
+    
+    .venue-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: var(--transition);
+    }
+    
+    .venue-card:hover .venue-img {
+      transform: scale(1.05);
+    }
+    
+    .venue-badge {
+      position: absolute;
+      top: 15px;
+      right: 15px;
+      background-color: var(--white);
+      color: var(--primary-dark);
+      padding: 6px 12px;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+    
+    .venue-details {
+      padding: 20px;
+    }
+    
+    .venue-name {
+      font-size: 1.2rem;
+      font-weight: 600;
+      margin-bottom: 8px;
+      color: var(--dark);
+    }
+    
+    .venue-meta {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 12px;
+      font-size: 0.9rem;
+      color: var(--medium);
+    }
+    
+    .venue-meta i {
+      color: var(--primary);
+      font-size: 0.8rem;
+    }
+    
+    .venue-price {
+      margin-bottom: 20px;
+      font-size: 1rem;
+    }
+    
+    .venue-price span {
+      color: var(--medium);
+    }
+    
+    .venue-price strong {
+      color: var(--primary-dark);
+      font-size: 1.2rem;
+    }
+    
+    .venue-button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      color: white;
+      padding: 10px 20px;
+      border-radius: var(--radius);
+      text-decoration: none;
+      font-weight: 500;
+      transition: var(--transition);
+      width: 100%;
+      text-align: center;
+      gap: 8px;
+    }
+    
+    .venue-button:hover {
+      background: linear-gradient(135deg, var(--primary-dark), #d81b60);
+      transform: translateY(-2px);
+    }
+    
+    /* Responsive Design */
+    @media (max-width: 1024px) {
+      .venue-container {
+        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      }
+    }
+    
+    @media (max-width: 768px) {
+      .heading {
+        font-size: 2rem;
+        margin: 30px 0 20px;
+      }
+      
+      .venue-container {
+        gap: 20px;
+      }
+      
+      .venue-img-container {
+        height: 180px;
+      }
+    }
+    
+    @media (max-width: 480px) {
+      .heading {
+        font-size: 1.8rem;
+      }
+      
+      .venue-container {
+        grid-template-columns: 1fr;
+      }
+      
+      .add-venue-btn {
+        width: 100%;
+        justify-content: center;
+      }
+    }
+  </style>
+</head>
+<body>
+  <%- include('../includes/Navbar') %>
+
+  <div class="container">
+    <h1 class="heading">Premium Wedding Venues</h1>
+    
+    <div class="action-bar">
+      <form method="get" action="/vendors/wedding-venues/new" class="add-venue-form">
+        <button type="submit" class="add-venue-btn">
+          <i class="fas fa-plus"></i> Add Your Venue
+        </button>
+      </form>
+    </div>
+
+    <div class="venue-container">
+      <% for(let venue of venuedata) { %>
+        <div class="venue-card">
+          <div class="venue-img-container">
+            <img src="<%= venue.image %>" alt="<%= venue.name %>" class="venue-img">
+            <span class="venue-badge"><%= venue.category %></span>
+          </div>
+          
+          <div class="venue-details">
+            <h3 class="venue-name"><%= venue.name %></h3>
+            <div class="venue-meta">
+              <i class="fas fa-map-marker-alt"></i>
+              <span><%= venue.city %></span>
+            </div>
+            
+            <div class="venue-price">
+              <span>Starting from:</span>
+              <strong>₹<%= venue.price.toLocaleString('en-IN') %></strong>
+            </div>
+
+            <a href="/venues/<%= venue.id %>" class="venue-button">
+              View Details <i class="fas fa-arrow-right"></i>
+            </a>
+          </div>
+        </div>
+      <% } %>
+    </div>
+  </div>
+</body>
+</html>

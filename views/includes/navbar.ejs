@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>VibeVista</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #f9f9f9;
+    }
+
+    header {
+      background: #fff;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      padding: 1rem;
+    }
+
+    nav {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .logo a {
+      font-size: 2rem;
+      font-weight: bold;
+      color: #e83e8c;
+      margin-bottom: 1rem;
+      text-align: center;
+      text-decoration: none;
+    }
+
+    .city-search {
+      display: flex;
+      width: 100%;
+      max-width: 400px;
+      border-radius: 30px;
+      background: #fff;
+      box-shadow: 0 4px 12px rgba(232, 62, 140, 0.2);
+      overflow: hidden;
+      margin-bottom: 1rem;
+    }
+
+    #city-input {
+      flex: 1;
+      padding: 0.75rem 1rem;
+      border: none;
+      font-size: 1rem;
+      border-radius: 30px 0 0 30px;
+      outline: none;
+    }
+
+    #city-search-btn {
+      padding: 0 1rem;
+      background: #e83e8c;
+      color: white;
+      border: none;
+      border-radius: 0 30px 30px 0;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    #city-search-btn svg {
+      width: 18px;
+      height: 18px;
+    }
+
+    .nav-links {
+      display: flex;
+      flex-wrap: nowrap;
+      overflow-x: auto;
+      gap: 1.5rem;
+      list-style: none;
+      padding: 0.5rem 0;
+      justify-content: center;
+      width: 100%;
+    }
+
+    .nav-links::-webkit-scrollbar {
+      display: none;
+    }
+
+    .nav-links li a {
+      text-decoration: none;
+      color: #333;
+      font-weight: 500;
+      white-space: nowrap;
+      position: relative;
+      padding-bottom: 5px;
+    }
+
+    .nav-links li a:hover {
+      color: #e83e8c;
+    }
+
+    .nav-links li a.active::after {
+      content: '';
+      position: absolute;
+      width: 100%;
+      height: 2px;
+      background: #e83e8c;
+      left: 0;
+      bottom: 0;
+    }
+
+    @media (min-width: 768px) {
+      nav {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .logo {
+        margin-bottom: 0;
+      }
+
+      .city-search {
+        margin-bottom: 0;
+        margin: 0 2rem;
+      }
+
+      .nav-links {
+        justify-content: flex-end;
+        gap: 2rem;
+        overflow: visible;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <nav>
+      <div class="logo"><a href="/" >VibeVista</a></div>
+
+      <div class="city-search">
+        <input type="text" id="city-input" placeholder="Search by city..." />
+        <button id="city-search-btn">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 16 16">
+            <path
+              d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+          </svg>
+        </button>
+      </div>
+
+      <ul class="nav-links">
+        <li><a href="/">Home</a></li>
+        <li><a href="/vendors/wedding-venues" >Venues</a></li>
+        <li><a href="photographers.html">Photographers</a></li>
+      
+        <% if (!user) { %>
+          <li><a href="/login">Login</a></li>
+          <li><a href="/signup">Signup</a></li>
+        <% } else { %>
+          
+          <li><a href="/logout">Logout</a></li>
+        <% } %>
+      </ul>
+    </nav>
+  </header>
+</body>
+</html>
+

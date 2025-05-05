@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wedding Categories</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #ff758c;
+            --secondary-color: #ff7eb3;
+            --text-color: #333;
+            --light-text: #666;
+            --bg-color: #fafafa;
+            --card-bg: #fff;
+            --footer-bg: #fff;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Wedding Categories Section */
+        .wedding-categories {
+            padding: 60px 0;
+        }
+        
+        .section-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        
+        .section-header h2 {
+            font-size: 2.2rem;
+            font-weight: 600;
+            margin-bottom: 15px;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .section-header h2:after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background: linear-gradient(90deg, var(--secondary-color), var(--primary-color));
+        }
+        
+        .section-header p {
+            color: var(--light-text);
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        
+        .category-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 25px;
+        }
+        
+        .category-card {
+            background: var(--card-bg);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+        
+        .category-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 25px rgba(0, 0, 0, 0.1);
+        }
+        
+        .card-image {
+            height: 180px;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .card-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        
+        .category-card:hover .card-image img {
+            transform: scale(1.1);
+        }
+        
+        .card-badge {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.8);
+        }
+        
+        .card-content {
+            padding: 20px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .card-content h3 {
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+            font-weight: 600;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .card-content h3 i {
+            color: var(--primary-color);
+            transition: transform 0.3s ease;
+        }
+        
+        .category-card:hover .card-content h3 i {
+            transform: translateX(5px);
+        }
+        
+        .card-content p {
+            font-size: 0.9rem;
+            color: var(--light-text);
+            margin-bottom: 15px;
+            flex: 1;
+        }
+        
+        .card-footer {
+            display: flex;
+            justify-content: flex-end;
+        }
+        
+        .explore-btn {
+            color: var(--primary-color);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            display: inline-flex;
+            align-items: center;
+            transition: color 0.3s ease;
+        }
+        
+        .explore-btn:hover {
+            color: var(--secondary-color);
+        }
+        
+        .explore-btn i {
+            margin-left: 5px;
+            transition: transform 0.3s ease;
+        }
+        
+        .explore-btn:hover i {
+            transform: translateX(3px);
+        }
+        
+        /* Color Classes */
+        .purple .card-badge { background-color: #e3e4ff; }
+        .peach .card-badge { background-color: #f6ddc7; }
+        .rose .card-badge { background-color: #e8c4c0; }
+        .orange .card-badge { background-color: #fdd9b0; }
+        .olive .card-badge { background-color: #deddbf; }
+        .mint .card-badge { background-color: #dcf4f1; }
+        .beige .card-badge { background-color: #f1e0d2; }
+        
+        /* Responsive Adjustments */
+        @media (max-width: 768px) {
+            .section-header h2 {
+                font-size: 1.8rem;
+            }
+            
+            .category-grid {
+                grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+                gap: 20px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .wedding-categories {
+                padding: 40px 0;
+            }
+            
+            .section-header h2 {
+                font-size: 1.6rem;
+            }
+            
+            .category-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <section class="wedding-categories">
+            <div class="section-header">
+                <h2>Wedding Categories</h2>
+                <p>Discover everything you need to make your special day perfect</p>
+            </div>
+            
+            <div class="category-grid">
+                <!-- Venues -->
+                <div class="category-card purple">
+                    <div class="card-image">
+                        <img src="https://i.pinimg.com/originals/7b/09/c9/7b09c9e4fad820e6b1688fd6351ef39f.jpg" alt="Venues">
+                        <span class="card-badge"></span>
+                    </div>
+                    <div class="card-content">
+                        <h3>Venues <i class="fas fa-chevron-right"></i></h3>
+                        <p>Banquet Halls, Marriage Garden / Lawn, Farmhouses, and more beautiful venues</p>
+                        <div class="card-footer">
+                            <a href="#" class="explore-btn">Explore <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Photographers -->
+                <div class="category-card peach">
+                    <div class="card-image">
+                        <img src="https://images.pexels.com/photos/5759215/pexels-photo-5759215.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Photographers">
+                        <span class="card-badge"></span>
+                    </div>
+                    <div class="card-content">
+                        <h3>Photographers <i class="fas fa-chevron-right"></i></h3>
+                        <p>Professional photographers to capture your precious moments</p>
+                        <div class="card-footer">
+                            <a href="#" class="explore-btn">Explore <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Makeup -->
+                <div class="category-card rose">
+                    <div class="card-image">
+                        <img src="https://images.pexels.com/photos/31732991/pexels-photo-31732991/free-photo-of-elegant-bride-in-traditional-indian-attire.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Makeup">
+                        <span class="card-badge"></span>
+                    </div>
+                    <div class="card-content">
+                        <h3>Makeup <i class="fas fa-chevron-right"></i></h3>
+                        <p>Bridal Makeup, Family Makeup, and professional beauty services</p>
+                        <div class="card-footer">
+                            <a href="#" class="explore-btn">Explore <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Pre Wedding Shoot -->
+                <div class="category-card purple">
+                    <div class="card-image">
+                        <img src="https://images.pexels.com/photos/29545399/pexels-photo-29545399/free-photo-of-bengali-couple-in-traditional-attire-at-santiniketan.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Pre Wedding">
+                        <span class="card-badge"></span>
+                    </div>
+                    <div class="card-content">
+                        <h3>Pre Wedding Shoot <i class="fas fa-chevron-right"></i></h3>
+                        <p>Pre Wedding Shoot Locations and professional photography services</p>
+                        <div class="card-footer">
+                            <a href="#" class="explore-btn">Explore <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Planning & Decor -->
+                <div class="category-card orange">
+                    <div class="card-image">
+                        <img src="https://images.pexels.com/photos/30184621/pexels-photo-30184621/free-photo-of-vibrant-outdoor-wedding-ceremony-with-floral-decor.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Planning and Decor">
+                        <span class="card-badge"></span>
+                    </div>
+                    <div class="card-content">
+                        <h3>Planning & Decor <i class="fas fa-chevron-right"></i></h3>
+                        <p>Wedding Planners, Decorators, and complete event management</p>
+                        <div class="card-footer">
+                            <a href="#" class="explore-btn">Explore <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Bridal Wear -->
+                <div class="category-card olive">
+                    <div class="card-image">
+                        <img src="https://images.pexels.com/photos/2218558/pexels-photo-2218558.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Bridal Wear">
+                        <span class="card-badge"></span>
+                    </div>
+                    <div class="card-content">
+                        <h3>Bridal Wear <i class="fas fa-chevron-right"></i></h3>
+                        <p>Bridal Lehengas, Kanjeevaram / Silk Sarees, and designer collections</p>
+                        <div class="card-footer">
+                            <a href="#" class="explore-btn">Explore <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Groom Wear -->
+                <div class="category-card mint">
+                    <div class="card-image">
+                        <img src="https://images.pexels.com/photos/27998980/pexels-photo-27998980/free-photo-of-best-groom-dress-for-wedding.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Groom Wear">
+                        <span class="card-badge"></span>
+                    </div>
+                    <div class="card-content">
+                        <h3>Groom Wear <i class="fas fa-chevron-right"></i></h3>
+                        <p>Sherwani, Wedding Suits / Tuxes, and traditional groom attire</p>
+                        <div class="card-footer">
+                            <a href="#" class="explore-btn">Explore <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Mehendi -->
+                <div class="category-card beige">
+                    <div class="card-image">
+                        <img src="https://images.pexels.com/photos/13102907/pexels-photo-13102907.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Mehndi">
+                        <span class="card-badge"></span>
+                    </div>
+                    <div class="card-content">
+                        <h3>Mehendi <i class="fas fa-chevron-right"></i></h3>
+                        <p>Mehendi Artists and traditional henna services</p>
+                        <div class="card-footer">
+                            <a href="#" class="explore-btn">Explore <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Foods -->
+                <div class="category-card rose">
+                    <div class="card-image">
+                        <img src="https://i.pinimg.com/originals/73/c5/6f/73c56fcd60b5df9be4a6ea7748594aaa.jpg" alt="food">
+                        <span class="card-badge"></span>
+                    </div>
+                    <div class="card-content">
+                        <h3>Foods <i class="fas fa-chevron-right"></i></h3>
+                        <p>Catering Services, Cake, Chaat & Food Stalls for your wedding</p>
+                        <div class="card-footer">
+                            <a href="#" class="explore-btn">Explore <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Music & Dance -->
+                <div class="category-card olive">
+                    <div class="card-image">
+                        <img src="https://images.pexels.com/photos/28987832/pexels-photo-28987832/free-photo-of-traditional-rajasthani-dancer-performing-outdoors.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Music & Dance">
+                        <span class="card-badge"></span>
+                    </div>
+                    <div class="card-content">
+                        <h3>Music & Dance <i class="fas fa-chevron-right"></i></h3>
+                        <p>DJs, Sangeet Choreographers, and Wedding Entertainment</p>
+                        <div class="card-footer">
+                            <a href="#" class="explore-btn">Explore <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+</body>
+</html>

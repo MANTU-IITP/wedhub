@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Popular Wedding Venues</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #ff758c;
+            --primary-light: #ff8da3;
+            --secondary: #ff7eb3;
+            --dark: #2e2e2e;
+            --medium: #666;
+            --light: #f9f9f9;
+            --white: #ffffff;
+            --shadow: 0 12px 24px rgba(0, 0, 0, 0.08);
+            --transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.1);
+            --radius: 16px;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: var(--light);
+            color: var(--dark);
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1320px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+        
+        /* Venues Carousel Section */
+        .venues-section {
+            padding: 80px 0;
+            position: relative;
+        }
+        
+        .section-header {
+            text-align: center;
+            margin-bottom: 50px;
+            position: relative;
+        }
+        
+        .section-header h2 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 16px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            display: inline-block;
+        }
+        
+        .section-header p {
+            color: var(--medium);
+            max-width: 700px;
+            margin: 0 auto;
+            font-size: 1.1rem;
+        }
+        
+        .carousel-container {
+            position: relative;
+            padding: 0 60px;
+        }
+        
+        .venues-carousel {
+            display: flex;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            gap: 30px;
+            padding: 30px 10px;
+            scroll-behavior: smooth;
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: none;
+        }
+        
+        .venues-carousel::-webkit-scrollbar {
+            display: none;
+        }
+        
+        .venue-card {
+            flex: 0 0 auto;
+            width: 280px;
+            scroll-snap-align: start;
+            background: var(--white);
+            border-radius: var(--radius);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            position: relative;
+        }
+        
+        .venue-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        }
+        
+        .venue-image {
+            height: 180px;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .venue-image:before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 50%;
+            background: linear-gradient(to top, rgba(0,0,0,0.7), transparent);
+            z-index: 1;
+        }
+        
+        .venue-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.8s ease;
+        }
+        
+        .venue-card:hover .venue-image img {
+            transform: scale(1.1);
+        }
+        
+        .venue-content {
+            padding: 20px;
+        }
+        
+        .venue-content h3 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 12px;
+            color: var(--dark);
+        }
+        
+        .localities {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 15px;
+        }
+        
+        .localities a {
+            color: var(--medium);
+            font-size: 0.85rem;
+            text-decoration: none;
+            transition: var(--transition);
+            padding: 4px 10px;
+            background: rgba(0, 0, 0, 0.03);
+            border-radius: 20px;
+        }
+        
+        .localities a:hover {
+            color: var(--primary);
+            background: rgba(255, 117, 140, 0.1);
+        }
+        
+        .all-localities {
+            display: inline-flex;
+            align-items: center;
+            color: var(--primary);
+            font-weight: 500;
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: var(--transition);
+        }
+        
+        .all-localities i {
+            margin-left: 6px;
+            transition: var(--transition);
+            font-size: 0.8rem;
+        }
+        
+        .all-localities:hover {
+            color: var(--secondary);
+        }
+        
+        .all-localities:hover i {
+            transform: translateX(3px);
+        }
+        
+        .carousel-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 50px;
+            height: 50px;
+            background: var(--white);
+            border: none;
+            border-radius: 50%;
+            box-shadow: var(--shadow);
+            cursor: pointer;
+            z-index: 2;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            color: var(--primary);
+            transition: var(--transition);
+            opacity: 0.9;
+        }
+        
+        .carousel-btn:hover {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: var(--white);
+            transform: translateY(-50%) scale(1.1);
+            opacity: 1;
+        }
+        
+        .carousel-btn.left {
+            left: -10px;
+        }
+        
+        .carousel-btn.right {
+            right: -10px;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 1200px) {
+            .venue-card {
+                width: 260px;
+            }
+        }
+        
+        @media (max-width: 992px) {
+            .venues-section {
+                padding: 70px 0;
+            }
+            
+            .section-header h2 {
+                font-size: 2.2rem;
+            }
+            
+            .carousel-container {
+                padding: 0 50px;
+            }
+            
+            .carousel-btn {
+                width: 45px;
+                height: 45px;
+                font-size: 1.1rem;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .section-header h2 {
+                font-size: 2rem;
+            }
+            
+            .section-header p {
+                font-size: 1rem;
+            }
+            
+            .venue-card {
+                width: 240px;
+            }
+            
+            .venue-image {
+                height: 160px;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .venues-section {
+                padding: 60px 0;
+            }
+            
+            .carousel-container {
+                padding: 0 30px;
+            }
+            
+            .venues-carousel {
+                gap: 20px;
+                padding: 25px 5px;
+            }
+            
+            .carousel-btn {
+                width: 40px;
+                height: 40px;
+                font-size: 1rem;
+            }
+        }
+        
+        @media (max-width: 400px) {
+            .venue-card {
+                width: 220px;
+            }
+            
+            .venue-image {
+                height: 150px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <section class="venues-section">
+            <div class="section-header">
+                <h2>Popular Wedding Venues</h2>
+                <p>Discover the perfect location for your dream wedding in Goa</p>
+            </div>
+            
+            <div class="carousel-container">
+                <button class="carousel-btn left" onclick="scrollCarousel(-1)" aria-label="Previous venues">
+                    <i class="fas fa-chevron-left"></i>
+                </button>
+                
+                <div class="venues-carousel" id="venuesCarousel">
+                    <!-- Banquet Halls -->
+                    <div class="venue-card">
+                        <div class="venue-image">
+                            <img src="https://images.pexels.com/photos/14716282/pexels-photo-14716282.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Luxury banquet hall">
+                        </div>
+                        <div class="venue-content">
+                            <h3>Banquet Halls</h3>
+                            <div class="localities">
+                                <a href="#">North Goa</a>
+                                <a href="#">South Goa</a>
+                                <a href="#">Calangute</a>
+                            </div>
+                            <a href="#" class="all-localities">All Localities <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                    
+                    <!-- Marriage Gardens -->
+                    <div class="venue-card">
+                        <div class="venue-image">
+                            <img src="https://images.pexels.com/photos/16555584/pexels-photo-16555584/free-photo-of-woman-in-traditional-clothing-with-man-in-suit.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Beautiful marriage garden">
+                        </div>
+                        <div class="venue-content">
+                            <h3>Marriage Gardens</h3>
+                            <div class="localities">
+                                <a href="#">North Goa</a>
+                                <a href="#">South Goa</a>
+                                <a href="#">Panaji</a>
+                            </div>
+                            <a href="#" class="all-localities">All Localities <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                    
+                    <!-- Hotels with Banquets -->
+                    <div class="venue-card">
+                        <div class="venue-image">
+                            <img src="https://images.pexels.com/photos/31045373/pexels-photo-31045373/free-photo-of-elegant-wedding-stage-decor-in-makassar.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Hotel banquet hall">
+                        </div>
+                        <div class="venue-content">
+                            <h3>Hotels with Banquets</h3>
+                            <div class="localities">
+                                <a href="#">5-star Hotels</a>
+                                <a href="#">Beach Resorts</a>
+                                <a href="#">Boutique Hotels</a>
+                            </div>
+                            <a href="#" class="all-localities">All Options <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                    
+                    <!-- Beach Weddings -->
+                    <div class="venue-card">
+                        <div class="venue-image">
+                            <img src="https://images.unsplash.com/photo-1720811103534-3ddbc993ddd0?q=80&w=1469&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Beach wedding setup">
+                        </div>
+                        <div class="venue-content">
+                            <h3>Beach Weddings</h3>
+                            <div class="localities">
+                                <a href="#">Palolem</a>
+                                <a href="#">Vagator</a>
+                                <a href="#">Colva</a>
+                            </div>
+                            <a href="#" class="all-localities">All Beaches <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                    
+                    <!-- Farmhouses -->
+                    <div class="venue-card">
+                        <div class="venue-image">
+                            <img src="https://images.unsplash.com/photo-1708133302586-2ffca3db5553?q=80&w=1485&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Rustic farmhouse">
+                        </div>
+                        <div class="venue-content">
+                            <h3>Farmhouses</h3>
+                            <div class="localities">
+                                <a href="#">North Goa</a>
+                                <a href="#">South Goa</a>
+                                <a href="#">Interior</a>
+                            </div>
+                            <a href="#" class="all-localities">All Properties <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                    
+                    <!-- Destination Weddings -->
+                    <div class="venue-card">
+                        <div class="venue-image">
+                            <img src="https://images.pexels.com/photos/2253870/pexels-photo-2253870.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Luxury destination wedding">
+                        </div>
+                        <div class="venue-content">
+                            <h3>Destination Weddings</h3>
+                            <div class="localities">
+                                <a href="#">Full Packages</a>
+                                <a href="#">International</a>
+                                <a href="#">Theme Weddings</a>
+                            </div>
+                            <a href="#" class="all-localities">All Packages <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+                
+                <button class="carousel-btn right" onclick="scrollCarousel(1)" aria-label="Next venues">
+                    <i class="fas fa-chevron-right"></i>
+                </button>
+            </div>
+        </section>
+    </div>
+
+    <script>
+        // Enhanced Carousel Functionality
+        function scrollCarousel(direction) {
+            const carousel = document.getElementById('venuesCarousel');
+            const cardWidth = document.querySelector('.venue-card').offsetWidth;
+            const scrollAmount = (cardWidth + 30) * direction; // 30px gap
+            
+            carousel.scrollBy({
+                left: scrollAmount,
+                behavior: 'smooth'
+            });
+        }
+
+        // Auto-hide buttons when at scroll extremes
+        const carousel = document.getElementById('venuesCarousel');
+        const leftBtn = document.querySelector('.carousel-btn.left');
+        const rightBtn = document.querySelector('.carousel-btn.right');
+
+        function updateButtonVisibility() {
+            const maxScroll = carousel.scrollWidth - carousel.clientWidth;
+            
+            // Fade out left button when at start
+            leftBtn.style.opacity = carousel.scrollLeft <= 10 ? '0.5' : '0.9';
+            leftBtn.style.pointerEvents = carousel.scrollLeft <= 10 ? 'none' : 'auto';
+            
+            // Fade out right button when at end
+            rightBtn.style.opacity = carousel.scrollLeft >= maxScroll - 10 ? '0.5' : '0.9';
+            rightBtn.style.pointerEvents = carousel.scrollLeft >= maxScroll - 10 ? 'none' : 'auto';
+        }
+
+        // Initialize button visibility
+        updateButtonVisibility();
+        
+        // Update on scroll
+        carousel.addEventListener('scroll', updateButtonVisibility);
+        
+        // Update on window resize
+        window.addEventListener('resize', updateButtonVisibility);
+    </script>
+</body>
+</html>
